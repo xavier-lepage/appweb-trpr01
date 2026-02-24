@@ -29,5 +29,5 @@
 
 |  ID | Priorité | Statut | Titre (tâche) | Relié à (RU#) | Critères d’acceptation (définition de done) | Notes / obstacles |
 | --: | :------: | :----: | ------------- | :-----------: | ------------------------------------------- | ----------------- |
-|  A1 |   MUST   |   ⬜    |               |               |                                             |                   |
+|  A1 |   MUST   |   ⬜    |   Créer les composants pricipaux du formulaire d'ajout de produit   |      #1   |   Hiérarchie de composants et formulaire structuré   |                   |
 |     |          |        |               |               |                                             |                   |

@@ -41,9 +41,9 @@ Initialiser le projet et mettre en place la structure de base.
 
 ---
 
-## Séance 2 — _AAAA-MM-JJ_ (Durée : _XhYm_)
+## Séance 2 — _2026-02-24_ (Durée : _1h40m_)
 **Objectif de la séance :**  
-…
+Débuter l'implémentation de base de la structure de l'application et débuter les premiers récits.
 
 **Travail réalisé (8–10 lignes min)**  
 - …
