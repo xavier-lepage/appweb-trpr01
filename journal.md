@@ -22,22 +22,22 @@ Pour **chaque séance**, écrire **8 à 10 lignes** (minimum) qui incluent :
 Initialiser le projet et mettre en place la structure de base.
 
 **Travail réalisé (8–10 lignes min)**  
-- Consultation des énoncés
-- Consultation des récits utilisateur
-- Appropriation des fichiers
-- Création du projet
-- Création du dépot GitHub
-- Configuration des permissions
-- Configuration de la structure du projet
-- Remplissage des étapes initiales des fichiers de log
-- Planification des fonctionnalités et de l'architecture
+- J'ai consulté les énoncés.
+- J'ai pris connaissance des récits utilisateur.
+- Je me suis approprié les fichiers.
+- J'ai fait la création du projet.
+- J'ai fait la création du dépot GitHub.
+- J'ai configuré les permissions.
+- J'ai mis en place la structure de mon projet.
+- J'ai fait le remplissage des étapes initiales des fichiers de log.
+- J'ai fait une brève planification des fonctionnalités et de l'architecture.
 
 **Difficultés / bugs**  
-- Initialisation du dépot avec le mauvais utilisateur et au mauvais endroit
+- Mon dépot était initialisé avec le mauvais utilisateur et au mauvais endroit.
 
 **Solutions / pistes testées**  
-- Changement d'utilisateur
-- Création du projet avant la création du dépot
+- J'ai changé l'utilisateur.
+- J'ai fait l'installation du projet avant d'initialiser le dépot.
 
 ---
 
@@ -62,9 +62,9 @@ Débuter l'implémentation de base de la structure de l'application et débuter 
 
 ---
 
-## Séance 3 — _AAAA-MM-JJ_ (Durée : _XhYm_)
+## Séance 3 — _2026-02-27_ (Durée : _2h30_)
 **Objectif de la séance :**  
-…
+Poursuivre l'implémentation des premiers récits utilisateur.
 
 **Travail réalisé (8–10 lignes min)**  
 - …
