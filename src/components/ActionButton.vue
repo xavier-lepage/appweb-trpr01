@@ -7,7 +7,7 @@ const props = defineProps<{
 	priority: Priority,
 }>();
 
-const priority = computed(() => `btn btn-${props.priority}`);
+const priority = computed<string>(() => `btn btn-${props.priority}`);
 </script>
 
 <template>
