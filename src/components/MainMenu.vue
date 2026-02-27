@@ -24,7 +24,7 @@ onMounted(() => {
 	}
 });
 
-function addProduct(): void {
+function toggleAddProductForm(): void {
 	manageProductFormVisibility(ProductAction.ADD)
 }
 
@@ -46,9 +46,9 @@ function manageProductFormVisibility(newAction: ProductAction): void {
 
 		<ActionButton
 			class="mx-2 my-4"
-			@click="addProduct()" 
+			@click="toggleAddProductForm()" 
 			:label="'Ajouter un composant'" 
-			:priority="Priority.SECONDARY">
+			:priority="Priority.PRIMARY">
 		</ActionButton>
 
 		<div class="collapse" ref="productForm">
