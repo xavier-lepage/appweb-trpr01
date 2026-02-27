@@ -31,4 +31,5 @@
 | A2 |   MUST   | ✅ |  Créer la structure de la page d'accueil  | #1 |  Interface modulaire et conçue pour respecter l'OCP  |  Difficultés avec Bootstrap et l'architecture  |
 | A3 |   MUST   | 🟦 |  Créer les composants pricipaux du formulaire d'ajout de produit   | #1 |   Hiérarchie de composants et formulaire structuré   |                   |
 | A4 |   MUST   | ⬜ |  Créer la la liste de produit et ses composants d'affichage   | #5 |   Une liste claire permet de visualiser l'ensemble des produits ajoutés   |                   |
+| B1 |   COULD   | ⬜ |  Bonifier les validations du formulaire   | #5 |   Rendre encore plus "responsive" les validations du formulaire   |                   |
 |     |          |        |               |               |                                             |                   |
