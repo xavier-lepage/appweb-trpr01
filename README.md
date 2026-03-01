@@ -114,6 +114,8 @@ npm run build
 ### Composants clés
 
 - `App` : Composant principal pour monter l'application
+- `MainMenu` : Menu principal avec boutons pour accéder aux fonctionnalités
+- `ProductForm` : Formulaire d'ajout, d'édition de produit
 
 ---
 
