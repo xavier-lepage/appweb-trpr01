@@ -1,60 +1,92 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref } from 'vue';
 import { productCategories, type ProductCategory } from '../../models/ProductCategory';
 import ActionButton from '../ActionButton.vue';
 import { Priority } from '../../models/Priority';
-let props = defineProps<{
+import type { Product } from '../../models/Product';
+const props = defineProps<{
 	formTitle: string
 }>();
 
+const emit = defineEmits(['addProduct', 'addProduct'])
+
 const PRODUCT_REGEX = /^\d+\.\d{2}$/gm
 
-const productID = ref<string>()
-const productName = ref<string>()
-const productDescription = ref<string>()
-const productPrice = ref<string>()
-const productStock = ref<string>()
-const productCategory = ref<ProductCategory>(productCategories[0])
-
-const formHasErrors = ref(false)
+const productID = ref<string>();
+const productName = ref<string>();
+const productDescription = ref<string>();
+const productBrand = ref<string>();
+const productPrice = ref<string>();
+const productStock = ref<string>();
+const productCategory = ref<ProductCategory>(productCategories[0]);
 
 function isRealTimeIDValid(): boolean {
-	return !(productID.value! <= "0")
+	return !(productID.value! <= "0");
 }
 
 function isRealTimeNameValid(): boolean {
 	if (productName.value?.valueOf().trim() !== "") {
 		if (productName.value?.length! < 3) {
-			return false
+			return false;
 		}
-		return true
+		return true;
 	}
-	return false
+	return false;
 }
 
 function isRealTimeDescriptionValid(): boolean {
-	return productDescription.value?.length! != 0
+	return productDescription.value?.length! != 0;
+}
+
+function isRealTimeBrandValid(): boolean {
+	return productBrand.value?.length! != 0;
 }
 
 function isRealTimePriceValid(): boolean {
 	if (productName.value?.valueOf().trim() !== "") {
 		if (!PRODUCT_REGEX.test(productPrice.value!) && productPrice.value! >= "0" || productPrice.value! < "0") {
-			return false
+			return false;
 		}
-		return true
+		return true;
 	}
-	return false
+	return false;
 }
 
 function isRealTimeStockValid(): boolean {
 	if (productName.value?.valueOf().trim() !== "") {
-		return !(productStock.value! < "0")
+		return !(productStock.value! < "0");
 	}
-	return true
+	return true;
 }
 
 function addProduct(): void {
-	// TODO
+	if (validateForm()) {
+		let product: Product = {
+			id: parseInt(productID.value!),
+			name: productName.value!,
+			description: productDescription.value!,
+			brand: productBrand.value!,
+			price: parseFloat(productPrice.value!),
+			stock: parseInt(productStock.value!),
+			productCategory: productCategory.value
+		}
+		emit('addProduct', product);
+		resetForm();
+	}
+}
+
+function validateForm(): boolean {
+	return (isRealTimeIDValid() && isRealTimeNameValid() && isRealTimeDescriptionValid() && isRealTimeBrandValid() && isRealTimePriceValid() && isRealTimeStockValid());
+}
+
+function resetForm(): void {
+	productID.value = ""
+	productName.value = ""
+	productDescription.value = "",
+	productBrand.value = "",
+	productPrice.value = "",
+	productStock.value = "",
+	productCategory.value = productCategories[0]
 }
 </script>
 
@@ -79,6 +111,12 @@ function addProduct(): void {
 				<label :class="{ 'text-danger-emphasis': !isRealTimeDescriptionValid() }" class="form-label mt-2 smooth-trans-300" for="product-description">Description</label>
 				<input v-model="productDescription" :class="{ 'is-invalid': !isRealTimeDescriptionValid() }" class="border-2 rounded-2 form-control" type="text" id="product-description" placeholder="...">
 				<div class="invalid-feedback">La description est obligatoire.</div>
+			</div>
+
+			<div class="text-start my-2">
+				<label :class="{ 'text-danger-emphasis': !isRealTimeBrandValid() }" class="form-label mt-2 smooth-trans-300" for="product-brand">Marque</label>
+				<input v-model="productBrand" :class="{ 'is-invalid': !isRealTimeBrandValid() }" class="border-2 rounded-2 form-control" type="text" id="product-brand" placeholder="...">
+				<div class="invalid-feedback">La marque est obligatoire.</div>
 			</div>
 
 			<div class="text-start my-2">

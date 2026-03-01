@@ -6,6 +6,8 @@ import { ProductAction } from '../models/ProductAction';
 import ActionButton from './ActionButton.vue';
 import Header from './Header.vue';
 import ProductForm from './ProductForm/ProductForm.vue';
+import ProductList from './ProductList/ProductList.vue';
+import type { Product } from '../models/Product';
 
 /*	Documentation utilisée pour le collapse bootstrap:
 	https://vuejs.org/guide/essentials/template-refs
@@ -16,27 +18,33 @@ import ProductForm from './ProductForm/ProductForm.vue';
 const currentAction = ref<ProductAction>(ProductAction.NONE);
 const formTitle = ref<string>('Ajouter un composant');
 const productForm = useTemplateRef("productForm");
-let collapse: Collapse;
+let productFormCollapse: Collapse;
 
 onMounted(() => {
 	if (productForm.value !== null) {
-		collapse = new Collapse(productForm.value, { toggle: false });
+		productFormCollapse = new Collapse(productForm.value, { toggle: false });
 	}
 });
 
 function toggleAddProductForm(): void {
-	manageProductFormVisibility(ProductAction.ADD)
+	manageProductFormVisibility(ProductAction.ADD);
 }
 
-function manageProductFormVisibility(newAction: ProductAction): void {
-	if (currentAction.value === newAction) {
-		collapse.hide();
-		currentAction.value = ProductAction.NONE
+
+function manageProductFormVisibility(actionPerformed: ProductAction): void {
+	if (currentAction.value === actionPerformed) {
+		productFormCollapse.hide();
+		currentAction.value = ProductAction.NONE;
 	} else {
-		formTitle.value = newAction
-		collapse.show();
-		currentAction.value = newAction
+		formTitle.value = actionPerformed;
+		productFormCollapse.show();
+		currentAction.value = actionPerformed;
 	}
+}
+
+function handleAddProduct(product: Product) {
+	console.log(product);
+	manageProductFormVisibility(ProductAction.ADD);
 }
 </script>
 
@@ -52,7 +60,7 @@ function manageProductFormVisibility(newAction: ProductAction): void {
 		</ActionButton>
 
 		<div class="collapse" ref="productForm">
-			<ProductForm :formTitle="formTitle"></ProductForm>
+			<ProductForm @addProduct="handleAddProduct" :formTitle="formTitle"></ProductForm>
 		</div>
 	</div>
 </template>
