@@ -52,5 +52,6 @@ export const productCategories = [
 	RAM,
 	Storage,
 	GPU,
+	PSU,
 	CPUCooler
 ] as const;
