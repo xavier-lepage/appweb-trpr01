@@ -82,7 +82,7 @@ function addProduct(): void {
 			</div>
 
 			<div class="text-start my-2">
-				<label :class="{ 'text-danger-emphasis': !isRealTimeDescriptionValid() }" class="form-label mt-2 smooth-trans-300" for="product-price">Prix</label>
+				<label :class="{ 'text-danger-emphasis': !isRealTimePriceValid() }" class="form-label mt-2 smooth-trans-300" for="product-price">Prix</label>
 				<input v-model="productPrice" :class="{ 'is-invalid': !isRealTimePriceValid() }" class="border-2 rounded-2 form-control" type="text" id="product-price" placeholder="0.00$">
 				<div class="invalid-feedback">Le prix doit être sous le format: 0.00.</div>
 			</div>
