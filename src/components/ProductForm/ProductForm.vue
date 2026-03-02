@@ -1,14 +1,18 @@
 <script setup lang="ts">
-import { ref } from 'vue';
+import { computed, ref, watch } from 'vue';
 import { productCategories, type ProductCategory } from '../../models/ProductCategory';
 import ActionButton from '../ActionButton.vue';
 import { Priority } from '../../models/Priority';
 import type { Product } from '../../models/Product';
+import { ProductAction } from '../../models/ProductAction';
+
 const props = defineProps<{
-	formTitle: string
+	formTitle: string,
+	currentAction: ProductAction
+	productToEdit?: Product
 }>();
 
-const emit = defineEmits(['addProduct', 'addProduct'])
+const emit = defineEmits(['addProduct', 'editProduct']);
 
 const PRODUCT_REGEX = /^\d+\.\d{2}$/gm
 
@@ -19,6 +23,34 @@ const productBrand = ref<string>();
 const productPrice = ref<string>();
 const productStock = ref<string>();
 const productCategory = ref<ProductCategory>(productCategories[0]);
+const buttonPriority = computed(() => {
+	switch (props.currentAction) {
+		case ProductAction.ADD:
+			return Priority.PRIMARY;
+		case ProductAction.EDIT:
+			return Priority.WARNING;
+	}
+});
+
+/*	Documentation utilisée pour watch:
+	https://vuejs.org/guide/essentials/watchers.html#watch-source-types
+	https://vuejs.org/guide/essentials/watchers.html#eager-watchers
+*/
+watch(
+	() => props.productToEdit,
+  	(productToEdit) => {
+		if (productToEdit !== undefined) {
+			productID.value = productToEdit.id.toString();
+			productName.value = productToEdit.name;
+			productDescription.value = productToEdit.description;
+			productBrand.value = productToEdit.brand;
+			productPrice.value = productToEdit.price.toString();
+			productStock.value = productToEdit.stock.toString();
+			productCategory.value = productToEdit.productCategory;
+		}
+	},
+	{ immediate: true }
+);
 
 function isRealTimeIDValid(): boolean {
 	return !(productID.value! <= "0");
@@ -61,22 +93,44 @@ function isRealTimeStockValid(): boolean {
 
 function addProduct(): void {
 	if (validateForm()) {
-		let product: Product = {
-			id: parseInt(productID.value!),
-			name: productName.value!,
-			description: productDescription.value!,
-			brand: productBrand.value!,
-			price: parseFloat(productPrice.value!),
-			stock: parseInt(productStock.value!),
-			productCategory: productCategory.value
-		}
-		emit('addProduct', product);
+		emit('addProduct', createProduct());
 		resetForm();
+	}
+}
+
+function editProduct(): void {
+	if (validateForm()) {
+		emit('editProduct', createProduct());
+		resetForm();
+	}
+}
+
+function createProduct(): Product {
+	return {
+		id: parseInt(productID.value!),
+		name: productName.value!,
+		description: productDescription.value!,
+		brand: productBrand.value!,
+		price: parseFloat(productPrice.value!),
+		stock: parseInt(productStock.value!),
+		productCategory: productCategory.value
 	}
 }
 
 function validateForm(): boolean {
 	return (isRealTimeIDValid() && isRealTimeNameValid() && isRealTimeDescriptionValid() && isRealTimeBrandValid() && isRealTimePriceValid() && isRealTimeStockValid());
+}
+
+function handleFormSubmission(): void {
+	console.log(props.currentAction);
+	switch (props.currentAction) {
+		case ProductAction.ADD:
+			addProduct();
+			break;
+		case ProductAction.EDIT:
+			editProduct();
+			break;
+	}
 }
 
 function resetForm(): void {
@@ -97,7 +151,7 @@ function resetForm(): void {
 		<form>
 			<div class="text-start my-2">
 				<label :class="{ 'text-danger-emphasis': !isRealTimeIDValid() }" class="form-label smooth-trans-300" for="product-id">ID du produit</label>
-				<input v-model="productID" :class="{ 'is-invalid': !isRealTimeIDValid() }" class="border-2 rounded-2 form-control" type="number" id="product-id" placeholder="0">
+				<input v-model="productID" :class="{ 'is-invalid': !isRealTimeIDValid() }" class="border-2 rounded-2 form-control" type="number" id="product-id" placeholder="0" :disabled="currentAction === ProductAction.EDIT">
 				<div class="invalid-feedback">L'ID du produit doit être un entier positif et unique.</div>
 			</div>
 
@@ -141,7 +195,7 @@ function resetForm(): void {
 			</div>
 
 			<div class="d-flex">	
-				<ActionButton @click="addProduct()" class="w-100" :label="'Ajouter le produit'" :priority="Priority.PRIMARY"></ActionButton>
+				<ActionButton @click="handleFormSubmission()" class="w-100" :label="props.currentAction" :priority="buttonPriority!"></ActionButton>
 			</div>
 		</form>
 	</div>

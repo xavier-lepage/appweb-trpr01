@@ -4,6 +4,8 @@ import type { Product } from '../../models/Product';
 const props = defineProps<{
 	product: Product
 }>();
+
+const emit = defineEmits(['editProduct']);
 </script>
 
 <template>
@@ -16,6 +18,14 @@ const props = defineProps<{
 			<div class="my-1"><span class="fw-bold">Prix:</span> {{ props.product.price }}</div>
 			<div class="my-1"><span class="fw-bold">Inventaire:</span> {{ props.product.stock }}</div>
 			<div class="my-1"><span class="fw-bold">Catégorie:</span> {{ props.product.productCategory.name }}</div>
+		</div>
+		<div class="d-flex flex-column">
+			<!-- Icônes trouvées sur FontAwesome:
+			https://fontawesome.com/icons/pen-to-square?f=classic&s=regular -->
+			
+			<button @click="emit('editProduct', props.product)" class="btn btn-warning h-100 my-2">
+				<img width="30px" height="30px" src="/src/assets/images/pen-to-square-regular-full.svg" alt="Modifier">
+			</button>
 		</div>
 	</div>
 </template>
