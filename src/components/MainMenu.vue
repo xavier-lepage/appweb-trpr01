@@ -38,6 +38,7 @@ const productList = ref<Product[]>([
 	}
 ]);
 const currentAction = ref<ProductAction>(ProductAction.NONE);
+const currentProduct = ref<Product>();
 const isListShown = ref<boolean>(false);
 const formTitle = ref<string>('Ajouter un composant');
 const productListElement = useTemplateRef("productList");
@@ -73,17 +74,34 @@ function manageProductFormVisibility(actionPerformed: ProductAction): void {
 		productFormCollapse.hide();
 		currentAction.value = ProductAction.NONE;
 	} else {
+		currentProduct.value = undefined
 		formTitle.value = actionPerformed;
 		productFormCollapse.show();
 		currentAction.value = actionPerformed;
 	}
 }
 
-function handleAddProduct(product: Product) {
-	productList.value?.push(product);
+function handleAddProduct(productToAdd: Product): void {
+	productList.value?.push(productToAdd);
 	manageProductFormVisibility(ProductAction.ADD);
 	productListCollapse.show();
 	isListShown.value = true;
+}
+
+function handleEditProduct(productToEdit: Product): void {
+	productList.value?.forEach((product, i) => {
+		if (product.id === productToEdit.id) {
+			productList.value[i] = productToEdit;
+		}
+	});
+	manageProductFormVisibility(ProductAction.EDIT);
+	productListCollapse.show();
+	isListShown.value = true;
+}
+
+function openEditProductForm(product: Product): void {
+	manageProductFormVisibility(ProductAction.EDIT);
+	currentProduct.value = product;
 }
 </script>
 
@@ -106,11 +124,11 @@ function handleAddProduct(product: Product) {
 		</ActionButton>
 
 		<div class="collapse" ref="productList">
-			<ProductList :products="productList"></ProductList>
+			<ProductList @editProduct="openEditProductForm" :products="productList"></ProductList>
 		</div>
 
 		<div class="collapse" ref="productForm">
-			<ProductForm @addProduct="handleAddProduct" :formTitle="formTitle"></ProductForm>
+			<ProductForm @editProduct="handleEditProduct" @addProduct="handleAddProduct" :productToEdit="currentProduct" :currentAction="currentAction" :formTitle="formTitle"></ProductForm>
 		</div>
 	</div>
 </template>

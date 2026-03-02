@@ -2,9 +2,12 @@
 import type { Product } from '../../models/Product';
 import { ProductAction } from '../../models/ProductAction';
 import ProductDisplay from './ProductDisplay.vue';
+
 const props = defineProps<{
 	products: Product[]
 }>();
+
+const emit = defineEmits(['editProduct']);
 </script>
 
 <template>
@@ -13,7 +16,7 @@ const props = defineProps<{
 
 		<div class="mt-4" v-if="products.length === 0">Aucun produit dans la liste pour l'instant.</div>
 		<div class="mt-4" v-for="product in products">
-			<ProductDisplay :product="product"></ProductDisplay>
+			<ProductDisplay @editProduct="product => emit('editProduct', product)" :product="product"></ProductDisplay>
 		</div>
 	</div>
 </template>
