@@ -86,9 +86,9 @@ Poursuivre l'implémentation des premiers récits utilisateur.
 
 ---
 
-## Séance 4 — _AAAA-MM-JJ_ (Durée : _XhYm_)
+## Séance 4 — _2026-03-03 (Durée : _1h40_)
 **Objectif de la séance :**  
-…
+Implémenter les fonctionnalités de duplication et de suppression de produits.
 
 **Travail réalisé (8–10 lignes min)**  
 - …
