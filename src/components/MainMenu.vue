@@ -81,9 +81,13 @@ function manageProductFormVisibility(actionPerformed: ProductAction): void {
 	}
 }
 
-function handleAddProduct(productToAdd: Product): void {
+function addProduct(productToAdd: Product): void {
 	productList.value?.push(productToAdd);
-	manageProductFormVisibility(ProductAction.ADD);
+}
+
+function handleAddProduct(productToAdd: Product, action: ProductAction): void {
+	addProduct(productToAdd);
+	manageProductFormVisibility(action);
 	productListCollapse.show();
 	isListShown.value = true;
 }
@@ -97,6 +101,11 @@ function handleEditProduct(productToEdit: Product): void {
 	manageProductFormVisibility(ProductAction.EDIT);
 	productListCollapse.show();
 	isListShown.value = true;
+}
+
+function openCloneProductForm(product: Product): void {
+	manageProductFormVisibility(ProductAction.CLONE);
+	currentProduct.value = product;
 }
 
 function openEditProductForm(product: Product): void {
@@ -124,11 +133,21 @@ function openEditProductForm(product: Product): void {
 		</ActionButton>
 
 		<div class="collapse" ref="productList">
-			<ProductList @editProduct="openEditProductForm" :products="productList"></ProductList>
+			<ProductList 
+				@cloneProduct="openCloneProductForm" 
+				@editProduct="openEditProductForm" 
+				:products="productList">
+			</ProductList>
 		</div>
 
 		<div class="collapse" ref="productForm">
-			<ProductForm @editProduct="handleEditProduct" @addProduct="handleAddProduct" :productToEdit="currentProduct" :currentAction="currentAction" :formTitle="formTitle"></ProductForm>
+			<ProductForm 
+				@addProduct="handleAddProduct" 
+				@editProduct="handleEditProduct" 
+				:product="currentProduct" 
+				:currentAction="currentAction" 
+				:formTitle="formTitle">
+			</ProductForm>
 		</div>
 	</div>
 </template>

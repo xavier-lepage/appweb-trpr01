@@ -7,7 +7,7 @@ const props = defineProps<{
 	products: Product[]
 }>();
 
-const emit = defineEmits(['editProduct']);
+const emit = defineEmits(['cloneProduct', 'editProduct']);
 </script>
 
 <template>
@@ -16,7 +16,11 @@ const emit = defineEmits(['editProduct']);
 
 		<div class="mt-4" v-if="products.length === 0">Aucun produit dans la liste pour l'instant.</div>
 		<div class="mt-4" v-for="product in products">
-			<ProductDisplay @editProduct="product => emit('editProduct', product)" :product="product"></ProductDisplay>
+			<ProductDisplay 
+				@cloneProduct="product => emit('cloneProduct', product)" 
+				@editProduct="product => emit('editProduct', product)" 
+				:product="product">
+			</ProductDisplay>
 		</div>
 	</div>
 </template>
