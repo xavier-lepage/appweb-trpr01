@@ -7,9 +7,9 @@ import type { Product } from '../../models/Product';
 import { ProductAction } from '../../models/ProductAction';
 
 const props = defineProps<{
-	formTitle: string,
+	formTitle: string
 	currentAction: ProductAction
-	productToEdit?: Product
+	product?: Product
 }>();
 
 const emit = defineEmits(['addProduct', 'editProduct']);
@@ -27,6 +27,8 @@ const buttonPriority = computed(() => {
 	switch (props.currentAction) {
 		case ProductAction.ADD:
 			return Priority.PRIMARY;
+		case ProductAction.CLONE:
+			return Priority.SECONDARY;
 		case ProductAction.EDIT:
 			return Priority.WARNING;
 	}
@@ -37,16 +39,18 @@ const buttonPriority = computed(() => {
 	https://vuejs.org/guide/essentials/watchers.html#eager-watchers
 */
 watch(
-	() => props.productToEdit,
-  	(productToEdit) => {
-		if (productToEdit !== undefined) {
-			productID.value = productToEdit.id.toString();
-			productName.value = productToEdit.name;
-			productDescription.value = productToEdit.description;
-			productBrand.value = productToEdit.brand;
-			productPrice.value = productToEdit.price.toString();
-			productStock.value = productToEdit.stock.toString();
-			productCategory.value = productToEdit.productCategory;
+	() => props.product,
+  	(product) => {
+		if (product !== undefined) {
+			if (props.currentAction === ProductAction.EDIT) {
+				productID.value = product.id.toString();
+			}
+			productName.value = product.name;
+			productDescription.value = product.description;
+			productBrand.value = product.brand;
+			productPrice.value = product.price.toString();
+			productStock.value = product.stock.toString();
+			productCategory.value = product.productCategory;
 		}
 	},
 	{ immediate: true }
@@ -91,20 +95,6 @@ function isRealTimeStockValid(): boolean {
 	return true;
 }
 
-function addProduct(): void {
-	if (validateForm()) {
-		emit('addProduct', createProduct());
-		resetForm();
-	}
-}
-
-function editProduct(): void {
-	if (validateForm()) {
-		emit('editProduct', createProduct());
-		resetForm();
-	}
-}
-
 function createProduct(): Product {
 	return {
 		id: parseInt(productID.value!),
@@ -122,14 +112,19 @@ function validateForm(): boolean {
 }
 
 function handleFormSubmission(): void {
-	console.log(props.currentAction);
-	switch (props.currentAction) {
-		case ProductAction.ADD:
-			addProduct();
-			break;
-		case ProductAction.EDIT:
-			editProduct();
-			break;
+	if (validateForm()) {
+		switch (props.currentAction) {
+			case ProductAction.ADD:
+				emit('addProduct', createProduct(), props.currentAction);
+				break;
+			case ProductAction.CLONE:
+				emit('addProduct', createProduct(), props.currentAction);
+				break;
+			case ProductAction.EDIT:
+				emit('editProduct', createProduct());
+				break;
+		}
+		resetForm();
 	}
 }
 
@@ -195,7 +190,7 @@ function resetForm(): void {
 			</div>
 
 			<div class="d-flex">	
-				<ActionButton @click="handleFormSubmission()" class="w-100" :label="props.currentAction" :priority="buttonPriority!"></ActionButton>
+				<ActionButton @click="handleFormSubmission()" class="w-100" :label="props.currentAction" :priority="buttonPriority"></ActionButton>
 			</div>
 		</form>
 	</div>
