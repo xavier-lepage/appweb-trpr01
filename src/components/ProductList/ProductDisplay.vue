@@ -5,7 +5,7 @@ const props = defineProps<{
 	product: Product
 }>();
 
-const emit = defineEmits(['cloneProduct', 'editProduct']);
+const emit = defineEmits(['cloneProduct', 'editProduct', 'deleteProduct']);
 </script>
 
 <template>
@@ -22,13 +22,17 @@ const emit = defineEmits(['cloneProduct', 'editProduct']);
 		<div class="d-flex flex-column">
 			<!-- Icônes trouvées sur FontAwesome:
 			https://fontawesome.com/icons/clone?f=classic&s=regular
-			https://fontawesome.com/icons/pen-to-square?f=classic&s=regular -->
+			https://fontawesome.com/icons/pen-to-square?f=classic&s=regular
+			https://fontawesome.com/icons/trash-can?f=classic&s=regular -->
 			
 			<button @click="emit('cloneProduct', props.product)" class="btn btn-secondary h-100 my-2">
 				<img width="30px" height="30px" src="/src/assets/images/clone-regular-full.svg" alt="Dupliquer">
 			</button>
 			<button @click="emit('editProduct', props.product)" class="btn btn-warning h-100 my-2">
 				<img width="30px" height="30px" src="/src/assets/images/pen-to-square-regular-full.svg" alt="Modifier">
+			</button>
+			<button @click="emit('deleteProduct', props.product)" class="btn btn-danger h-100 my-2">
+				<img width="30px" height="30px" src="/src/assets/images/trash-can-regular-full.svg" alt="Supprimer">
 			</button>
 		</div>
 	</div>

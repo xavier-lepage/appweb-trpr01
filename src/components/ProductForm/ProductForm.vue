@@ -14,6 +14,7 @@ const props = defineProps<{
 
 const emit = defineEmits(['addProduct', 'editProduct']);
 
+//	Expression régulière conçue avec Regex101
 const PRODUCT_REGEX = /^\d+\.\d{2}$/gm
 
 const productID = ref<string>();

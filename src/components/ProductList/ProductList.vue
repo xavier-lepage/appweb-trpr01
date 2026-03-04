@@ -7,7 +7,7 @@ const props = defineProps<{
 	products: Product[]
 }>();
 
-const emit = defineEmits(['cloneProduct', 'editProduct']);
+const emit = defineEmits(['cloneProduct', 'editProduct', 'deleteProduct']);
 </script>
 
 <template>
@@ -19,6 +19,7 @@ const emit = defineEmits(['cloneProduct', 'editProduct']);
 			<ProductDisplay 
 				@cloneProduct="product => emit('cloneProduct', product)" 
 				@editProduct="product => emit('editProduct', product)" 
+				@deleteProduct="product => emit('deleteProduct', product)" 
 				:product="product">
 			</ProductDisplay>
 		</div>
