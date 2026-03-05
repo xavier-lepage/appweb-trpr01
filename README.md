@@ -116,8 +116,9 @@ npm run build
 - `App` : Composant principal pour monter l'application.
 - `MainMenu` : Menu principal avec boutons pour accéder aux fonctionnalités.
 - `ProductForm` : Formulaire d'ajout, d'édition et de duplication de produit.
-- `ProductDisplay`: Affiche les informations liées à un produit à l'écran.
-- `ProductList`: Liste des produits, contient des `ProductDisplay`.
+- `ProductDisplay` : Affiche les informations liées à un produit à l'écran et offre des options pour dupliquer, éditer ou supprimer le produit lié.
+- `ProductList` : Liste des produits, contient des `ProductDisplay` et une `SearchBar` pour filtrer les produits.
+- `SearchBar` : Barre de recherche avec libellé, icône et événement lors de changement à la requête.
 
 ---
 

@@ -1,7 +1,21 @@
 <script setup lang="ts">
+import { ref, watch } from 'vue';
+
 const props = defineProps<{
 	label: string
 }>();
+
+const emit = defineEmits(['updateSearch']);
+
+const query = ref<string>("");
+
+watch(
+	() => query.value,
+  	(query) => {
+		emit('updateSearch', query.toLowerCase());
+	},
+	{ immediate: true }
+);
 </script>
 
 <template>
@@ -14,6 +28,6 @@ const props = defineProps<{
 			<img src="/src/assets/images/magnifying-glass-solid-full.svg" alt="Recherche" width="20px" height="20px" />
 		</span>
 
-		<input type="text" class="form-control rounded-end-4" :placeholder="label">
+		<input v-model="query" type="text" class="form-control rounded-end-4" :placeholder="label">
 	</div>
 </template>
