@@ -71,10 +71,14 @@ onMounted(() => {
 
 function toggleAddProductForm(): void {
 	manageProductFormVisibility(ProductAction.ADD);
-	if (isListShown.value && currentAction.value == ProductAction.ADD) {
-		productListCollapse.hide();
-		isListShown.value = !isListShown.value;
+	if (currentAction.value === ProductAction.ADD) {
+		closeProductList();
 	}
+}
+
+function closeProductList(): void {
+	productListCollapse.hide();
+	isListShown.value = false;
 }
 
 function toggleProductList(): void {
@@ -137,11 +141,13 @@ function handleDeleteProduct(productToDelete: Product): void {
 
 function openCloneProductForm(product: Product): void {
 	manageProductFormVisibility(ProductAction.CLONE);
+	closeProductList();
 	currentProduct.value = product;
 }
 
 function openEditProductForm(product: Product): void {
 	manageProductFormVisibility(ProductAction.EDIT);
+	closeProductList();
 	currentProduct.value = product;
 }
 </script>
