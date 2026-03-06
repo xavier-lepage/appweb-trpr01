@@ -71,6 +71,10 @@ onMounted(() => {
 
 function toggleAddProductForm(): void {
 	manageProductFormVisibility(ProductAction.ADD);
+	if (isListShown.value && currentAction.value == ProductAction.ADD) {
+		productListCollapse.hide();
+		isListShown.value = !isListShown.value;
+	}
 }
 
 function toggleProductList(): void {

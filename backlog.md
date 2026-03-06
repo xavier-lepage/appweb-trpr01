@@ -32,8 +32,12 @@
 | A3 |   MUST   | ✅ |  Créer les composants pricipaux du formulaire d'ajout de produit   | #1 |   Hiérarchie de composants et formulaire structuré   |  Difficultés au niveau des validations en temps réel  |
 | B1 |   MUST   | ✅ |  Créer la la liste de produit et ses composants d'affichage   | #5 |   Une liste claire permet de visualiser l'ensemble des produits ajoutés   |  Le temps passé à concevoir l'architecture a grandement facilité cette étape.  |
 | B2 |   MUST   | ✅ |  Ajouter un bouton d'édition aux produits de la liste  | #2 |   Le bouton déclenche l'ouverture du formulaire et son remplissage.  |  Le côté "responsive" du formulaire ne fonctionnait pas correctement.  |
-| B3 |   MUST   | ✅ |  Ajouter un bouton de duplication aux produits de la liste  | #3 |  Le bouton déclenche l'ouverture du formulaire et son remplissage.  |                   |
-| B4 |   MUST   | ✅ |  Ajouter un bouton de suppression aux produits de la liste  | #4 |   Le bouton déclenche une fenêtre modale afin de confirmer l'action.   |                   |
+| B3 |   MUST   | ✅ |  Ajouter un bouton de duplication aux produits de la liste  | #3 |  Le bouton déclenche l'ouverture du formulaire et son remplissage.  |  Avertissement dans la console réglé.  |
+| B4 |   MUST   | ✅ |  Ajouter un bouton de suppression aux produits de la liste  | #4 |   Le bouton déclenche une fenêtre modale afin de confirmer l'action.   |  Utilisation d'un modal Bootstrap pour confirmer l'action.  |
+| B5 |   MUST   | ✅ |  Ajouter un champ de recherche  | #6 |  Le champ de recherche est situé dans la liste des produits.  |  J'utilise un "input group" de Bootstrap pour donner un petit style à ma barre de recherche.  |
+| B6 |   MUST   | ✅ |  Permettre le filtre en temps réel grâce à la recherche  | #6 |  Seuls les produits dont le nom contient le contenu de la recherche sont affichés.  |  Je fais un tri en temps réel des produits à afficher dans la liste avec un `computed` et la méthode `filter` de JavaScript.  |
+| C1 |   MUST   | 🟦 |  Affichage par défaut plus minimaliste au niveau de `ProductDisplay`  | #7 |  `ProductDisplay` est plus épuré et peut être agrandi pour voir les détails d'un produit.  |    |
+| C2 |   MUST   | ⬜ |  Ajout d'un code de couleur sur le champ d'inventaire de `ProductDisplay`  | #7 |  Un code de couleur est appliqué dynamiquement sur le champ de l'inventaire.  |    |
 | F1 |   SHOULD   | ⬜ |  Problèmes au niveau de la validation du formulaire de produit  | #1 |   Validation en temps réel réinitialisée après ajout et le prix affiche correctement les erreurs.   |                   |
 | F2 |   COULD   | ⬜ |  Bonifier les validations du formulaire   | #1 |   Rendre encore plus "responsive" les validations du formulaire   |                   |
 |     |          |        |               |               |                                             |                   |
