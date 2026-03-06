@@ -5,11 +5,14 @@ const props = defineProps<{
 	stock: number
 }>();
 
+const CRITICAL_STOCK_TRESHOLD: number = 3;
+const LOW_STOCK_TRESHOLD: number = 5;
+
 const stockIndicatorPriority = computed(() => {
-	if (props.stock <= 3) {
+	if (props.stock <= CRITICAL_STOCK_TRESHOLD) {
 		return Priority.DANGER;
 	}
-	else if (props.stock <= 5) {
+	else if (props.stock <= LOW_STOCK_TRESHOLD) {
 		return Priority.WARNING;
 	}
 	else {

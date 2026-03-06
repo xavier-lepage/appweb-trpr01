@@ -119,6 +119,7 @@ npm run build
 - `ProductDisplay` : Affiche les informations liées à un produit à l'écran et offre des options pour dupliquer, éditer ou supprimer le produit lié.
 - `ProductList` : Liste des produits, contient des `ProductDisplay` et une `SearchBar` pour filtrer les produits.
 - `SearchBar` : Barre de recherche avec libellé, icône et événement lors de changement à la requête.
+- `StockIndicator` : Indicateur de niveau d'inventaire avec code de couleur.
 
 ---
 

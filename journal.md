@@ -119,14 +119,20 @@ Implémenter un style minimaliste pour ProductDisplay et un indicateur visuel de
 - J'ai consulté beaucoup de documentation Bootstrap sur les options de style.
 - J'ai modifié des styles de bases de l'accordéon avec des classes Bootstrap.
 - J'ai ajouté des styles personnalisés à l'accordéon pour suivre le thème visuel de l'application.
+- J'ai ajouté un indicateur visuel coloré pour le niveau d'inventaire des produits.
+- J'ai réglé un bogue avec la mise en évidence du formulaire qui ne se produisait pas avec la duplication et l'édition.
 
 **Difficultés / bugs**  
 - Les styles de base de l'accordéon Bootstrap étaient problématiques. Lorsque j'appliquais une bordure arrondie et colorée, elle était entrecoupée aux alentours des coins. 
-- Il y avait une ombre en dessous du titre.
+- Il y avait une ombre indésirée en dessous du titre de l'accordéon.
+- Mon indicateur visuel causait un mauvais alignement vertical du texte.
+- Ma fonctionnalité de mise en évidence ne prenait pas en compte la duplication et l'édition.
 
 **Solutions / pistes testées**  
 - J'ai fait du débogage à partir de l'inspecteur du navigateur pour trouver les coupables.
 - J'ai consultée la documentation de Bootstrap pour trouver comment couper ce qui dépassait de ma div et enlever l'ombre.
+- J'ai utilisé un `flex` afin d'aligner verticalement le texte.
+- J'ai fait en sorte que les actions de duplication et d'édition causent également la mise en évidence du formulaire.
 
 ---
 
