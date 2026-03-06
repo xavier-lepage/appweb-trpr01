@@ -115,6 +115,7 @@ Implémenter un style minimaliste pour ProductDisplay et un indicateur visuel de
 **Travail réalisé (8–10 lignes min)**  
 - J'ai fait en sorte que le formulaire de produit soit mis en évidence lorsqu'on l'ouvre pour plus de clarté.
 - J'ai ajouté un accordéon Bootstrap pour avoir un affichage plus minimaliste.
+- J'ai fait le choix de permettre à plusieurs produits d'afficher leurs détails en même temps pour permettre la comparaison.
 - J'ai fait du débogage au niveay du style de l'accordéon à partir de l'inspecteur du navigateur.
 - J'ai consulté beaucoup de documentation Bootstrap sur les options de style.
 - J'ai modifié des styles de bases de l'accordéon avec des classes Bootstrap.

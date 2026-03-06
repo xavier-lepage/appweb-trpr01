@@ -9,6 +9,7 @@ import ProductForm from './ProductForm/ProductForm.vue';
 import ProductList from './ProductList/ProductList.vue';
 import type { Product } from '../models/Product';
 import { productCategories } from '../models/ProductCategory';
+import StockAlert from './StockAlert.vue';
 
 // Données de seed
 const productList = ref<Product[]>([
@@ -169,6 +170,10 @@ function openEditProductForm(product: Product): void {
 			:label="'Ajouter un composant'" 
 			:priority="Priority.PRIMARY">
 		</ActionButton>
+
+		<div v-for="product in productList">
+			<StockAlert v-if="product.stock <= 3" :product="product"></StockAlert>
+		</div>
 
 		<div class="collapse" ref="productList">
 			<ProductList 
