@@ -108,27 +108,25 @@ Implémenter les fonctionnalités de duplication et de suppression de produits.
 
 ---
 
-## Séance 5 — _AAAA-MM-JJ_ (Durée : _XhYm_)
+## Séance 5 — _2026-03-06_ (Durée : _2h30_)
 **Objectif de la séance :**  
-…
+Implémenter un style minimaliste pour ProductDisplay et un indicateur visuel des quantités.
 
 **Travail réalisé (8–10 lignes min)**  
-- …
-- …
-- …
-- …
-- …
-- …
-- …
-- …
-- …
+- J'ai fait en sorte que le formulaire de produit soit mis en évidence lorsqu'on l'ouvre pour plus de clarté.
+- J'ai ajouté un accordéon Bootstrap pour avoir un affichage plus minimaliste.
+- J'ai fait du débogage au niveay du style de l'accordéon à partir de l'inspecteur du navigateur.
+- J'ai consulté beaucoup de documentation Bootstrap sur les options de style.
+- J'ai modifié des styles de bases de l'accordéon avec des classes Bootstrap.
+- J'ai ajouté des styles personnalisés à l'accordéon pour suivre le thème visuel de l'application.
 
 **Difficultés / bugs**  
-- …
+- Les styles de base de l'accordéon Bootstrap étaient problématiques. Lorsque j'appliquais une bordure arrondie et colorée, elle était entrecoupée aux alentours des coins. 
+- Il y avait une ombre en dessous du titre.
 
 **Solutions / pistes testées**  
-- …
-
+- J'ai fait du débogage à partir de l'inspecteur du navigateur pour trouver les coupables.
+- J'ai consultée la documentation de Bootstrap pour trouver comment couper ce qui dépassait de ma div et enlever l'ombre.
 
 ---
 
