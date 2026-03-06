@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import type { Product } from '../../models/Product';
+import StockIndicator from './StockIndicator.vue';
 
 const props = defineProps<{
 	product: Product
@@ -22,7 +23,15 @@ const emit = defineEmits(['cloneProduct', 'editProduct', 'deleteProduct']);
 					data-bs-toggle="collapse" 
 					:data-bs-target="`#product-${props.product.id}`" 
 					:aria-controls="`product-${props.product.id}`">
-						{{ props.product.name }}
+					<div class="d-flex justify-content-between w-100">
+						<span 
+							class="d-flex align-items-center">
+								{{ props.product.name }}
+						</span>
+						<StockIndicator
+							:stock="props.product.stock">
+						</StockIndicator>
+					</div>
 				</button>
 			</h2>
 			<div :id="`product-${props.product.id}`" class="accordion-collapse collapse">
@@ -33,7 +42,7 @@ const emit = defineEmits(['cloneProduct', 'editProduct', 'deleteProduct']);
 							<div class="my-1"><span class="fw-bold">Nom:</span> {{ props.product.name }}</div>
 							<div class="my-1"><span class="fw-bold">Description:</span> {{ props.product.description }}</div>
 							<div class="my-1"><span class="fw-bold">Marque:</span> {{ props.product.brand }}</div>
-							<div class="my-1"><span class="fw-bold">Prix:</span> {{ props.product.price }}</div>
+							<div class="my-1"><span class="fw-bold">Prix:</span> {{ props.product.price }}$</div>
 							<div class="my-1"><span class="fw-bold">Inventaire:</span> {{ props.product.stock }}</div>
 							<div class="my-1"><span class="fw-bold">Catégorie:</span> {{ props.product.productCategory.name }}</div>
 						</div>
