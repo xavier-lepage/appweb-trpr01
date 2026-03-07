@@ -120,7 +120,7 @@ npm run build
 - `ProductList` : Liste des produits, contient des `ProductDisplay` et une `SearchBar` pour filtrer les produits.
 - `SearchBar` : Barre de recherche avec libellé, icône et événement lors de changement à la requête.
 - `StockIndicator` : Indicateur de niveau d'inventaire avec code de couleur.
-
+- `StockAlert` : Message d'alerte de faible niveau d'inventaire de produit.
 ---
 
 ## 7) Utilisation de l’IA (OBLIGATOIRE)

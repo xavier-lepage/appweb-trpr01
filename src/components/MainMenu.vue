@@ -9,6 +9,7 @@ import ProductForm from './ProductForm/ProductForm.vue';
 import ProductList from './ProductList/ProductList.vue';
 import type { Product } from '../models/Product';
 import { productCategories } from '../models/ProductCategory';
+import StockAlert from './StockAlert.vue';
 
 // Données de seed
 const productList = ref<Product[]>([
@@ -29,6 +30,24 @@ const productList = ref<Product[]>([
 		price: 99.99,
 		stock: 6,
 		productCategory: productCategories[1]
+	},
+	{
+		id: 3,
+		name: "SuperCool Power+ 120mm",
+		description: "Puissant système de refroidissement à air de 120mm",
+		brand: "Cryo",
+		price: 67.99,
+		stock: 2,
+		productCategory: productCategories[6]
+	},
+	{
+		id: 4,
+		name: "V-Force 420 Turbo 12GB",
+		description: "Carte graphique haut de gamme.",
+		brand: "Novideo",
+		price: 2399.99,
+		stock: 8,
+		productCategory: productCategories[4]
 	}
 ]);
 const currentAction = ref<ProductAction>(ProductAction.NONE);
@@ -169,6 +188,10 @@ function openEditProductForm(product: Product): void {
 			:label="'Ajouter un composant'" 
 			:priority="Priority.PRIMARY">
 		</ActionButton>
+
+		<div v-for="product in productList">
+			<StockAlert v-if="product.stock <= 3" :product="product"></StockAlert>
+		</div>
 
 		<div class="collapse" ref="productList">
 			<ProductList 

@@ -22,9 +22,11 @@ const stockIndicatorPriority = computed(() => {
 </script>
 
 <template>
+	<!-- Documentation utilisée pour éviter le retour à la ligne
+	https://getbootstrap.com/docs/5.2/utilities/text/#text-wrapping-and-overflow -->
 	<span 
 		:class="`border-${stockIndicatorPriority} bg-${stockIndicatorPriority}-subtle text-${stockIndicatorPriority} `" 
-		class="d-flex align-items-center text-center border border-1 border-opacity-50 me-3 px-3 py-1 rounded-pill">
+		class="d-flex align-items-center text-center text-nowrap border border-1 border-opacity-50 me-3 px-3 py-1 rounded-pill">
 			Inventaire: {{ props.stock }}
 	</span>
 </template>
