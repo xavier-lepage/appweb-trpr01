@@ -10,6 +10,7 @@ import ProductList from './ProductList/ProductList.vue';
 import type { Product } from '../models/Product';
 import { productCategories } from '../models/ProductCategory';
 import StockAlert from './StockAlert.vue';
+import { exportProductsCSV } from '../scripts/exportProductsCSV';
 
 // Données de seed
 const productList = ref<Product[]>([
@@ -187,6 +188,13 @@ function openEditProductForm(product: Product): void {
 			@click="toggleAddProductForm()" 
 			:label="'Ajouter un composant'" 
 			:priority="Priority.PRIMARY">
+		</ActionButton>
+
+		<ActionButton
+			class="mx-2 my-4"
+			@click="exportProductsCSV(productList)" 
+			:label="'Télécharger en CSV'" 
+			:priority="Priority.SUCCESS">
 		</ActionButton>
 
 		<div v-for="product in productList">
