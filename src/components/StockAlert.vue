@@ -23,7 +23,7 @@ function dismiss(): void {
 		<!-- Documentation utilisée pour éviter le retour à la ligne
 		https://getbootstrap.com/docs/5.2/utilities/text/#text-wrapping-and-overflow -->
 		<span class="fw-bold me-2 text-nowrap">
-			{{ product.stock }} restant<span v-if="product.stock !== 1">s</span>:
+			{{ product.stock }} restant<span v-if="product.stock > 1">s</span>:
 		</span> 
 		
 		<span>Le produit « {{ product.name }} » est presque épuisé.</span>

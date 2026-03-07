@@ -132,14 +132,28 @@ function deleteProduct(): void {
 		https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter#parameters
 	*/
 	productList.value = productList.value?.filter((product) => product !== currentProduct.value);
+
 	currentProduct.value = undefined;
 }
 
+function getNewProductID(): number {
+	let latestID: number = 0;
+
+	productList.value.forEach((product) => {
+		latestID = Math.max(latestID, product.id);
+	});
+
+	return latestID + 1;
+}
+
 function handleAddProduct(productToAdd: Product, action: ProductAction): void {
+	productToAdd.id = getNewProductID();
 	addProduct(productToAdd);
 	manageProductFormVisibility(action);
 	productListCollapse.show();
 	isListShown.value = true;
+
+	currentProduct.value = undefined;
 }
 
 function handleEditProduct(productToEdit: Product): void {
@@ -151,6 +165,8 @@ function handleEditProduct(productToEdit: Product): void {
 	manageProductFormVisibility(ProductAction.EDIT);
 	productListCollapse.show();
 	isListShown.value = true;
+
+	currentProduct.value = undefined;
 }
 
 function handleDeleteProduct(productToDelete: Product): void {
