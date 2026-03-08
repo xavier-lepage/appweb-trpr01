@@ -26,7 +26,13 @@ const stockIndicatorPriority = computed(() => {
 	https://getbootstrap.com/docs/5.2/utilities/text/#text-wrapping-and-overflow -->
 	<span 
 		:class="`border-${stockIndicatorPriority} bg-${stockIndicatorPriority}-subtle text-${stockIndicatorPriority} `" 
-		class="d-flex align-items-center text-center text-nowrap border border-1 border-opacity-50 me-3 px-3 py-1 rounded-pill">
+		class="d-flex align-items-center text-center text-nowrap border border-1 border-opacity-50 mx-3 px-3 py-1 rounded-pill indicator-height">
 			Inventaire: {{ props.stock }}
 	</span>
 </template>
+
+<style>
+.indicator-height {
+	height: 28px;
+}
+</style>

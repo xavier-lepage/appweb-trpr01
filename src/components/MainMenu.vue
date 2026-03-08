@@ -194,14 +194,14 @@ function openEditProductForm(product: Product): void {
 
 		<ActionButton
 			class="mx-2 my-4"
-			@click="toggleProductList()"
+			@click="toggleProductList"
 			:label="'Liste des composants'" 
 			:priority="Priority.INFO">
 		</ActionButton>
 
 		<ActionButton
 			class="mx-2 my-4"
-			@click="toggleAddProductForm()" 
+			@click="toggleAddProductForm" 
 			:label="'Ajouter un composant'" 
 			:priority="Priority.PRIMARY">
 		</ActionButton>

@@ -22,27 +22,29 @@ Décrire en 5–10 lignes l’application réalisée :
 
 ## 2) Fonctionnalités (récits utilisateurs)
 
-- [ ] 1. Je peux ajouter un nouveau produit.
+- [x] 1. Je peux ajouter un nouveau produit.
 	- Remplir un formulaire et cliquer sur "Ajouter".
 	- Validation des champs obligatoires.
-- [ ] 2. Je peux modifier un produit existant.
+- [x] 2. Je peux modifier un produit existant.
 	- Bouton "Modifier" qui prérempli un nouveau formulaire avec les données du produit sélectionné.
-- [ ] 3. Je peux dupliquer un produit existant pour en créer un nouveau rapidement.
+- [x] 3. Je peux dupliquer un produit existant pour en créer un nouveau rapidement.
 	- Bouton "Dupliquer" qui prérempli un nouveau formulaire avec les données du produit sélectionné (excluant l'ID).
-- [ ] 4. Je peux supprimer un produit.
+- [x] 4. Je peux supprimer un produit.
 	- Confirmer la suppression après avoir cliqué sur le bouton "Supprimer" avec une fenêtre modale.
-- [ ] 5. Je peux consulter a liste des produits.
+- [x] 5. Je peux consulter a liste des produits.
 	- Affichage conditionnel sous forme de tableau.
-- [ ] 6. Je peux rechercher un produit par son nom.
+- [x] 6. Je peux rechercher un produit par son nom.
 	- Champ de recherche dynamique avec mise à jour instantanée des résultats.
-- [ ] 7. Je peux voir les détails d'un produit.
+- [x] 7. Je peux voir les détails d'un produit.
 	- Cliquer sur un produit affiche ses détails (nom, description, prix, stock).
-- [ ] 8. Je peux voir les quantités disponibles d'un produit.
+- [x] 8. Je peux voir les quantités disponibles d'un produit.
 	- Affichage en temps réel des quantités avec indicateur visuel (couleurs).
-- [ ] 9. Je peux être averti lorsqu'un produit est en rupture de stock.
+- [x] 9. Je peux être averti lorsqu'un produit est en rupture de stock.
 	- Notification (message / toast / snackbar) lorsqu'un produit atteint un stock critique (inférieur ou égal à 3).
-- [ ] 10. Je peux exporter la liste des produits en CSV.
+- [x] 10. Je peux exporter la liste des produits en CSV.
 	- Bouton "Exporter" permettant de télécharger la liste en format CSV.
+- [x] 11. L'application possède une identité visuelle cohérente.
+	- L'application porte un logo et un nom.
 
 > Ajouter ici toute fonctionnalité optionnelle (ex. catégorie, actif, date de création, etc.).
 
