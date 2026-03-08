@@ -37,7 +37,7 @@ export const GPU: ProductCategory = {
 export const PSU: ProductCategory = {
 	id: 6,
 	name: "Alimentation",
-	description: "Fourni l'énergie nécessaire pour le fonctionnement de l'ordinateur."
+	description: "Alimente l'ordinateur en énergie."
 }
 
 export const CPUCooler: ProductCategory = {

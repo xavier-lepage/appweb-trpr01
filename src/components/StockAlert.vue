@@ -19,7 +19,7 @@ function dismiss(): void {
 	<div v-if="isShown" class="d-flex align-items-center text-start alert alert-danger alert-dismissible fade show rounded-4 mb-4" role="alert">
 		<!-- Icône trouvée sur FontAwesome:
 		https://fontawesome.com/icons/triangle-exclamation?f=classic&s=solid -->
-		<img :src="`/src/assets/images/triangle-exclamation-solid-full-danger.svg`" class="me-2 pt-1" height="24px" width="24px" alt="Avertissement">
+		<img src="/src/assets/icons/triangle-exclamation-solid-full-danger.svg" class="me-2 pt-1" height="24px" width="24px" alt="Avertissement">
 		<!-- Documentation utilisée pour éviter le retour à la ligne
 		https://getbootstrap.com/docs/5.2/utilities/text/#text-wrapping-and-overflow -->
 		<span class="fw-bold me-2 text-nowrap">

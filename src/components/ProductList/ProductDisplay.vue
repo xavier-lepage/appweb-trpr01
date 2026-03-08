@@ -23,7 +23,7 @@ const emit = defineEmits(['cloneProduct', 'editProduct', 'deleteProduct']);
 					data-bs-toggle="collapse" 
 					:data-bs-target="`#product-${props.product.id}`" 
 					:aria-controls="`product-${props.product.id}`">
-					<div class="d-flex justify-content-between w-100">
+					<div class="d-flex justify-content-between align-items-center w-100">
 						<span 
 							class="d-flex align-items-center">
 								{{ props.product.name }}
@@ -53,13 +53,13 @@ const emit = defineEmits(['cloneProduct', 'editProduct', 'deleteProduct']);
 							https://fontawesome.com/icons/trash-can?f=classic&s=regular -->
 							
 							<button @click="emit('cloneProduct', props.product)" class="btn btn-secondary h-100 my-2">
-								<img width="30px" height="30px" src="/src/assets/images/clone-regular-full.svg" alt="Dupliquer">
+								<img width="30px" height="30px" src="/src/assets/icons/clone-regular-full.svg" alt="Dupliquer">
 							</button>
 							<button @click="emit('editProduct', props.product)" class="btn btn-warning h-100 my-2">
-								<img width="30px" height="30px" src="/src/assets/images/pen-to-square-regular-full.svg" alt="Modifier">
+								<img width="30px" height="30px" src="/src/assets/icons/pen-to-square-regular-full.svg" alt="Modifier">
 							</button>
 							<button @click="emit('deleteProduct', props.product)" class="btn btn-danger h-100 my-2">
-								<img width="30px" height="30px" src="/src/assets/images/trash-can-regular-full.svg" alt="Supprimer">
+								<img width="30px" height="30px" src="/src/assets/icons/trash-can-regular-full.svg" alt="Supprimer">
 							</button>
 						</div>
 					</div>

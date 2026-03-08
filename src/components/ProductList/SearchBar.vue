@@ -25,7 +25,7 @@ watch(
 		<span class="input-group-text rounded-start-4">
 			<!-- Icône trouvée sur FontAwesome:
 			https://fontawesome.com/icons/magnifying-glass?f=classic&s=solid -->
-			<img src="/src/assets/images/magnifying-glass-solid-full.svg" alt="Recherche" width="20px" height="20px" />
+			<img src="/src/assets/icons/magnifying-glass-solid-full.svg" alt="Recherche" width="20px" height="20px" />
 		</span>
 
 		<input v-model="query" type="text" class="form-control rounded-end-4" :placeholder="label">
