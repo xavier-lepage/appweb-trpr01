@@ -7,16 +7,17 @@ import type { Product } from '../../models/Product';
 import { ProductAction } from '../../models/ProductAction';
 
 const props = defineProps<{
-	formTitle: string,
+	formTitle: string
 	currentAction: ProductAction
-	productToEdit?: Product
+	product?: Product
 }>();
 
 const emit = defineEmits(['addProduct', 'editProduct']);
 
+//	Expression régulière conçue avec Regex101
 const PRODUCT_REGEX = /^\d+\.\d{2}$/gm
 
-const productID = ref<string>();
+const productID = ref<number>(0);
 const productName = ref<string>();
 const productDescription = ref<string>();
 const productBrand = ref<string>();
@@ -27,36 +28,14 @@ const buttonPriority = computed(() => {
 	switch (props.currentAction) {
 		case ProductAction.ADD:
 			return Priority.PRIMARY;
+		case ProductAction.CLONE:
+			return Priority.SECONDARY;
 		case ProductAction.EDIT:
 			return Priority.WARNING;
 	}
 });
 
-/*	Documentation utilisée pour watch:
-	https://vuejs.org/guide/essentials/watchers.html#watch-source-types
-	https://vuejs.org/guide/essentials/watchers.html#eager-watchers
-*/
-watch(
-	() => props.productToEdit,
-  	(productToEdit) => {
-		if (productToEdit !== undefined) {
-			productID.value = productToEdit.id.toString();
-			productName.value = productToEdit.name;
-			productDescription.value = productToEdit.description;
-			productBrand.value = productToEdit.brand;
-			productPrice.value = productToEdit.price.toString();
-			productStock.value = productToEdit.stock.toString();
-			productCategory.value = productToEdit.productCategory;
-		}
-	},
-	{ immediate: true }
-);
-
-function isRealTimeIDValid(): boolean {
-	return !(productID.value! <= "0");
-}
-
-function isRealTimeNameValid(): boolean {
+const isProductNameValid = computed(() => {
 	if (productName.value?.valueOf().trim() !== "") {
 		if (productName.value?.length! < 3) {
 			return false;
@@ -64,17 +43,17 @@ function isRealTimeNameValid(): boolean {
 		return true;
 	}
 	return false;
-}
+});
 
-function isRealTimeDescriptionValid(): boolean {
+const isProductDescriptionValid = computed(() => {
 	return productDescription.value?.length! != 0;
-}
+});
 
-function isRealTimeBrandValid(): boolean {
+const isProductBrandValid = computed(() => {
 	return productBrand.value?.length! != 0;
-}
+});
 
-function isRealTimePriceValid(): boolean {
+const isProductPriceValid = computed(() => {
 	if (productName.value?.valueOf().trim() !== "") {
 		if (!PRODUCT_REGEX.test(productPrice.value!) && productPrice.value! >= "0" || productPrice.value! < "0") {
 			return false;
@@ -82,32 +61,40 @@ function isRealTimePriceValid(): boolean {
 		return true;
 	}
 	return false;
-}
+});
 
-function isRealTimeStockValid(): boolean {
+const isProductStockValid = computed(() => {
 	if (productName.value?.valueOf().trim() !== "") {
 		return !(productStock.value! < "0");
 	}
 	return true;
-}
+});
 
-function addProduct(): void {
-	if (validateForm()) {
-		emit('addProduct', createProduct());
-		resetForm();
-	}
-}
-
-function editProduct(): void {
-	if (validateForm()) {
-		emit('editProduct', createProduct());
-		resetForm();
-	}
-}
+/*	Documentation utilisée pour watch:
+	https://vuejs.org/guide/essentials/watchers.html#watch-source-types
+	https://vuejs.org/guide/essentials/watchers.html#eager-watchers
+*/
+watch(
+	() => props.product,
+  	(product) => {
+		if (product !== undefined) {
+			if (props.currentAction === ProductAction.EDIT) {
+				productID.value = product.id;
+			}
+			productName.value = product.name;
+			productDescription.value = product.description;
+			productBrand.value = product.brand;
+			productPrice.value = product.price.toString();
+			productStock.value = product.stock.toString();
+			productCategory.value = product.productCategory;
+		}
+	},
+	{ immediate: true }
+);
 
 function createProduct(): Product {
 	return {
-		id: parseInt(productID.value!),
+		id: productID.value,
 		name: productName.value!,
 		description: productDescription.value!,
 		brand: productBrand.value!,
@@ -118,29 +105,34 @@ function createProduct(): Product {
 }
 
 function validateForm(): boolean {
-	return (isRealTimeIDValid() && isRealTimeNameValid() && isRealTimeDescriptionValid() && isRealTimeBrandValid() && isRealTimePriceValid() && isRealTimeStockValid());
+	return (isProductNameValid.value && isProductDescriptionValid.value && isProductBrandValid.value && isProductPriceValid.value && isProductStockValid.value);
 }
 
 function handleFormSubmission(): void {
-	console.log(props.currentAction);
-	switch (props.currentAction) {
-		case ProductAction.ADD:
-			addProduct();
-			break;
-		case ProductAction.EDIT:
-			editProduct();
-			break;
+	if (validateForm()) {
+		switch (props.currentAction) {
+			case ProductAction.ADD:
+				emit('addProduct', createProduct(), props.currentAction);
+				break;
+			case ProductAction.CLONE:
+				emit('addProduct', createProduct(), props.currentAction);
+				break;
+			case ProductAction.EDIT:
+				emit('editProduct', createProduct());
+				break;
+		}
+		resetForm();
 	}
 }
 
 function resetForm(): void {
-	productID.value = ""
-	productName.value = ""
-	productDescription.value = "",
-	productBrand.value = "",
-	productPrice.value = "",
-	productStock.value = "",
-	productCategory.value = productCategories[0]
+	productID.value = 0;
+	productName.value = "";
+	productDescription.value = "";
+	productBrand.value = "";
+	productPrice.value = "";
+	productStock.value = "";
+	productCategory.value = productCategories[0];
 }
 </script>
 
@@ -150,38 +142,32 @@ function resetForm(): void {
 	
 		<form>
 			<div class="text-start my-2">
-				<label :class="{ 'text-danger-emphasis': !isRealTimeIDValid() }" class="form-label smooth-trans-300" for="product-id">ID du produit</label>
-				<input v-model="productID" :class="{ 'is-invalid': !isRealTimeIDValid() }" class="border-2 rounded-2 form-control" type="number" id="product-id" placeholder="0" :disabled="currentAction === ProductAction.EDIT">
-				<div class="invalid-feedback">L'ID du produit doit être un entier positif et unique.</div>
-			</div>
-
-			<div class="text-start my-2">
-				<label :class="{ 'text-danger-emphasis': !isRealTimeNameValid() }" class="form-label mt-2 smooth-trans-300" for="product-name">Nom du produit</label>
-				<input v-model="productName" :class="{ 'is-invalid': !isRealTimeNameValid() }" class="border-2 rounded-2 form-control" type="text" id="product-name" placeholder="...">
+				<label :class="{ 'text-danger-emphasis': !isProductNameValid }" class="form-label mt-2 smooth-trans-300" for="product-name">Nom du produit</label>
+				<input v-model="productName" :class="{ 'is-invalid': !isProductNameValid }" class="border-2 rounded-2 form-control" type="text" id="product-name" placeholder="...">
 				<div class="invalid-feedback">Le nom du produit doit faire au moins 3 caractères.</div>
 			</div>
 
 			<div class="text-start my-2">
-				<label :class="{ 'text-danger-emphasis': !isRealTimeDescriptionValid() }" class="form-label mt-2 smooth-trans-300" for="product-description">Description</label>
-				<input v-model="productDescription" :class="{ 'is-invalid': !isRealTimeDescriptionValid() }" class="border-2 rounded-2 form-control" type="text" id="product-description" placeholder="...">
+				<label :class="{ 'text-danger-emphasis': !isProductDescriptionValid }" class="form-label mt-2 smooth-trans-300" for="product-description">Description</label>
+				<textarea v-model="productDescription" :class="{ 'is-invalid': !isProductDescriptionValid }" class="border-2 rounded-2 form-control" type="text" id="product-description" placeholder="..."></textarea>
 				<div class="invalid-feedback">La description est obligatoire.</div>
 			</div>
 
 			<div class="text-start my-2">
-				<label :class="{ 'text-danger-emphasis': !isRealTimeBrandValid() }" class="form-label mt-2 smooth-trans-300" for="product-brand">Marque</label>
-				<input v-model="productBrand" :class="{ 'is-invalid': !isRealTimeBrandValid() }" class="border-2 rounded-2 form-control" type="text" id="product-brand" placeholder="...">
+				<label :class="{ 'text-danger-emphasis': !isProductBrandValid }" class="form-label mt-2 smooth-trans-300" for="product-brand">Marque</label>
+				<input v-model="productBrand" :class="{ 'is-invalid': !isProductBrandValid }" class="border-2 rounded-2 form-control" type="text" id="product-brand" placeholder="...">
 				<div class="invalid-feedback">La marque est obligatoire.</div>
 			</div>
 
 			<div class="text-start my-2">
-				<label :class="{ 'text-danger-emphasis': !isRealTimePriceValid() }" class="form-label mt-2 smooth-trans-300" for="product-price">Prix</label>
-				<input v-model="productPrice" :class="{ 'is-invalid': !isRealTimePriceValid() }" class="border-2 rounded-2 form-control" type="text" id="product-price" placeholder="0.00$">
+				<label :class="{ 'text-danger-emphasis': !isProductPriceValid }" class="form-label mt-2 smooth-trans-300" for="product-price">Prix</label>
+				<input v-model="productPrice" :class="{ 'is-invalid': !isProductPriceValid }" class="border-2 rounded-2 form-control" type="text" id="product-price" placeholder="0.00$">
 				<div class="invalid-feedback">Le prix doit être sous le format: 0.00.</div>
 			</div>
 
 			<div class="text-start my-2">
-				<label :class="{ 'text-danger-emphasis': !isRealTimeStockValid() }" class="form-label mt-2 smooth-trans-300" for="product-stock">Inventaire</label>
-				<input v-model="productStock" :class="{ 'is-invalid': !isRealTimeStockValid() }" class="border-2 rounded-2 form-control" type="number" id="product-stock" placeholder="0">
+				<label :class="{ 'text-danger-emphasis': !isProductStockValid }" class="form-label mt-2 smooth-trans-300" for="product-stock">Inventaire</label>
+				<input v-model="productStock" :class="{ 'is-invalid': !isProductStockValid }" class="border-2 rounded-2 form-control" type="number" id="product-stock" placeholder="0">
 				<div class="invalid-feedback">Le stock doit être un entier positif ou nul.</div>
 			</div>
 
@@ -195,7 +181,7 @@ function resetForm(): void {
 			</div>
 
 			<div class="d-flex">	
-				<ActionButton @click="handleFormSubmission()" class="w-100" :label="props.currentAction" :priority="buttonPriority!"></ActionButton>
+				<ActionButton @click="handleFormSubmission()" class="w-100" :label="props.currentAction" :priority="buttonPriority"></ActionButton>
 			</div>
 		</form>
 	</div>

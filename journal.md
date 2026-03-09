@@ -86,60 +86,71 @@ Poursuivre l'implémentation des premiers récits utilisateur.
 
 ---
 
-## Séance 4 — _AAAA-MM-JJ_ (Durée : _XhYm_)
+## Séance 4 — _2026-03-03_ (Durée : _1h40_)
 **Objectif de la séance :**  
-…
+Implémenter les fonctionnalités de duplication et de suppression de produits.
 
 **Travail réalisé (8–10 lignes min)**  
-- …
-- …
-- …
-- …
-- …
-- …
-- …
-- …
-- …
+- J'ai ajouté un bouton à mon composant ProductDisplay pour permettre la duplication de produit.
+- J'ai ajouté la logique pour permettre la duplication.
+- J'ai modifié mon code d'ajout de produit pour le rendre moins redondant avec les nouvelles fonctionnalités.
+- J'ai fait du débogage pour trouver ce qui causait un avertissement dans la console.
+- J'ai réglé l'avertissement persistant dans la console.
+- J'ai fait état de l'avancement de mon projet.
 
 **Difficultés / bugs**  
-- …
+- Mon architecture pour l'ajout de produit était inoptimale et causait de la répétition.
+- Il y avait un avertissement persistant dans la console à cause d'un bouton, ce qui posait problème.
 
 **Solutions / pistes testées**  
-- …
-
+- J'ai dû faire de petits changements au niveau de l'architecture pour réutiliser mon code davantage.
+- J'ai ajouté une valeur par défaut avec un "null coalescence operator" dans mon bouton personnalisé pour rendre un paramètre optionnel, réglant l'avertissement.
 
 ---
 
-## Séance 5 — _AAAA-MM-JJ_ (Durée : _XhYm_)
+## Séance 5 — _2026-03-06_ (Durée : _2h30_)
 **Objectif de la séance :**  
-…
+Implémenter un style minimaliste pour ProductDisplay et un indicateur visuel des quantités.
 
 **Travail réalisé (8–10 lignes min)**  
-- …
-- …
-- …
-- …
-- …
-- …
-- …
-- …
-- …
+- J'ai fait en sorte que le formulaire de produit soit mis en évidence lorsqu'on l'ouvre pour plus de clarté.
+- J'ai ajouté un accordéon Bootstrap pour avoir un affichage plus minimaliste.
+- J'ai fait le choix de permettre à plusieurs produits d'afficher leurs détails en même temps pour permettre la comparaison.
+- J'ai fait du débogage au niveay du style de l'accordéon à partir de l'inspecteur du navigateur.
+- J'ai consulté beaucoup de documentation Bootstrap sur les options de style.
+- J'ai modifié des styles de bases de l'accordéon avec des classes Bootstrap.
+- J'ai ajouté des styles personnalisés à l'accordéon pour suivre le thème visuel de l'application.
+- J'ai ajouté un indicateur visuel coloré pour le niveau d'inventaire des produits.
+- J'ai réglé un bogue avec la mise en évidence du formulaire qui ne se produisait pas avec la duplication et l'édition.
 
 **Difficultés / bugs**  
-- …
+- Les styles de base de l'accordéon Bootstrap étaient problématiques. Lorsque j'appliquais une bordure arrondie et colorée, elle était entrecoupée aux alentours des coins. 
+- Il y avait une ombre indésirée en dessous du titre de l'accordéon.
+- Mon indicateur visuel causait un mauvais alignement vertical du texte.
+- Ma fonctionnalité de mise en évidence ne prenait pas en compte la duplication et l'édition.
 
 **Solutions / pistes testées**  
-- …
-
+- J'ai fait du débogage à partir de l'inspecteur du navigateur pour trouver les coupables.
+- J'ai consultée la documentation de Bootstrap pour trouver comment couper ce qui dépassait de ma div et enlever l'ombre.
+- J'ai utilisé un `flex` afin d'aligner verticalement le texte.
+- J'ai fait en sorte que les actions de duplication et d'édition causent également la mise en évidence du formulaire.
 
 ---
 
 ## Résumé global (à compléter avant remise)
-- **Ce dont je suis le plus fier/fière :** …
-- **Ce que j’améliorerais avec plus de temps :** …
+- **Ce dont je suis le plus fier/fière :** Je suis particulièrement fier de ma liste de produits au niveau de sa structure, son aspect visuel et la convivialité de la fonction de recherche. Il en va de même pour l'alerte modale lors d'une suppression de produit. Je suis aussi fier de mon effort concernant la planification.
+- **Ce que j’améliorerais avec plus de temps :** 
+	- La validation du formulaire ne fonctionne pas exactement comme je l'aurais espéré. J'aurais aimé la rendre un peu plus dynamique et régler ses quelques bogues. 
+	- De manière similaire, j'aurais pu peaufiner le système d'ouverture et de fermeture des différents panneaux ou implémenter du défilement automatique pour les mettre en évidence.
+	- J'aurais aimé mettre en place une notification lors du téléchargement de `CSV` pour donner plus de rétroaction à l'utilisateur.
+	- J'aurais pris le temps d'isoler davantage ma logique applicatif dans plusieurs fichiers de scripts.
+	- Pour réutiliser davantage mon code, j'aurais fait un composant spécifique pour l'alerte modale.
+	- J'aurais ajouté un `prop` optionnel à mon composant de bouton afin d'inclure une icône.
+	- Je crois qu'il aurait été pertinent de d'implémenter l'importation de fichier `CSV` afin d'avoir un système de sauvegarde un peu plus fonctionnel ainsi que pour permettre le partage. Une autre alternative serait le `JSON`.
+	- Finalement, j'aurais ajouté plus de catégories de composants pour plus de diversité.
 - **3 apprentissages techniques :**  
-  1) …  
-  2) …  
-  3) …
+  1)	J'ai pratiqué mon sens de la planification et de la structure de projet en devant être prévoyant pour faciliter le développement.
+  2) 	J'ai nettement améliorer ma maîtrise de Bootstrap en l'utilisant pour la grande majorité de la mise en page (à quelques exceptions près qui demandaient un contrôle plus fin).
+  3)	J'ai appris à télécharger un fichier à partir du script.
 
 ---
