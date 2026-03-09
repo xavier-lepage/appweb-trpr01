@@ -30,6 +30,11 @@ button {
   padding: 2em;
 }
 
+textarea {
+	max-height: 120px;
+	resize: vertical;
+}
+
 #app {
   width: 892px;
   margin: 0 auto;

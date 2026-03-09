@@ -35,6 +35,41 @@ const buttonPriority = computed(() => {
 	}
 });
 
+const isProductNameValid = computed(() => {
+	if (productName.value?.valueOf().trim() !== "") {
+		if (productName.value?.length! < 3) {
+			return false;
+		}
+		return true;
+	}
+	return false;
+});
+
+const isProductDescriptionValid = computed(() => {
+	return productDescription.value?.length! != 0;
+});
+
+const isProductBrandValid = computed(() => {
+	return productBrand.value?.length! != 0;
+});
+
+const isProductPriceValid = computed(() => {
+	if (productName.value?.valueOf().trim() !== "") {
+		if (!PRODUCT_REGEX.test(productPrice.value!) && productPrice.value! >= "0" || productPrice.value! < "0") {
+			return false;
+		}
+		return true;
+	}
+	return false;
+});
+
+const isProductStockValid = computed(() => {
+	if (productName.value?.valueOf().trim() !== "") {
+		return !(productStock.value! < "0");
+	}
+	return true;
+});
+
 /*	Documentation utilisée pour watch:
 	https://vuejs.org/guide/essentials/watchers.html#watch-source-types
 	https://vuejs.org/guide/essentials/watchers.html#eager-watchers
@@ -57,41 +92,6 @@ watch(
 	{ immediate: true }
 );
 
-function isRealTimeNameValid(): boolean {
-	if (productName.value?.valueOf().trim() !== "") {
-		if (productName.value?.length! < 3) {
-			return false;
-		}
-		return true;
-	}
-	return false;
-}
-
-function isRealTimeDescriptionValid(): boolean {
-	return productDescription.value?.length! != 0;
-}
-
-function isRealTimeBrandValid(): boolean {
-	return productBrand.value?.length! != 0;
-}
-
-function isRealTimePriceValid(): boolean {
-	if (productName.value?.valueOf().trim() !== "") {
-		if (!PRODUCT_REGEX.test(productPrice.value!) && productPrice.value! >= "0" || productPrice.value! < "0") {
-			return false;
-		}
-		return true;
-	}
-	return false;
-}
-
-function isRealTimeStockValid(): boolean {
-	if (productName.value?.valueOf().trim() !== "") {
-		return !(productStock.value! < "0");
-	}
-	return true;
-}
-
 function createProduct(): Product {
 	return {
 		id: productID.value,
@@ -105,7 +105,7 @@ function createProduct(): Product {
 }
 
 function validateForm(): boolean {
-	return (isRealTimeNameValid() && isRealTimeDescriptionValid() && isRealTimeBrandValid() && isRealTimePriceValid() && isRealTimeStockValid());
+	return (isProductNameValid.value && isProductDescriptionValid.value && isProductBrandValid.value && isProductPriceValid.value && isProductStockValid.value);
 }
 
 function handleFormSubmission(): void {
@@ -142,32 +142,32 @@ function resetForm(): void {
 	
 		<form>
 			<div class="text-start my-2">
-				<label :class="{ 'text-danger-emphasis': !isRealTimeNameValid() }" class="form-label mt-2 smooth-trans-300" for="product-name">Nom du produit</label>
-				<input v-model="productName" :class="{ 'is-invalid': !isRealTimeNameValid() }" class="border-2 rounded-2 form-control" type="text" id="product-name" placeholder="...">
+				<label :class="{ 'text-danger-emphasis': !isProductNameValid }" class="form-label mt-2 smooth-trans-300" for="product-name">Nom du produit</label>
+				<input v-model="productName" :class="{ 'is-invalid': !isProductNameValid }" class="border-2 rounded-2 form-control" type="text" id="product-name" placeholder="...">
 				<div class="invalid-feedback">Le nom du produit doit faire au moins 3 caractères.</div>
 			</div>
 
 			<div class="text-start my-2">
-				<label :class="{ 'text-danger-emphasis': !isRealTimeDescriptionValid() }" class="form-label mt-2 smooth-trans-300" for="product-description">Description</label>
-				<input v-model="productDescription" :class="{ 'is-invalid': !isRealTimeDescriptionValid() }" class="border-2 rounded-2 form-control" type="text" id="product-description" placeholder="...">
+				<label :class="{ 'text-danger-emphasis': !isProductDescriptionValid }" class="form-label mt-2 smooth-trans-300" for="product-description">Description</label>
+				<textarea v-model="productDescription" :class="{ 'is-invalid': !isProductDescriptionValid }" class="border-2 rounded-2 form-control" type="text" id="product-description" placeholder="..."></textarea>
 				<div class="invalid-feedback">La description est obligatoire.</div>
 			</div>
 
 			<div class="text-start my-2">
-				<label :class="{ 'text-danger-emphasis': !isRealTimeBrandValid() }" class="form-label mt-2 smooth-trans-300" for="product-brand">Marque</label>
-				<input v-model="productBrand" :class="{ 'is-invalid': !isRealTimeBrandValid() }" class="border-2 rounded-2 form-control" type="text" id="product-brand" placeholder="...">
+				<label :class="{ 'text-danger-emphasis': !isProductBrandValid }" class="form-label mt-2 smooth-trans-300" for="product-brand">Marque</label>
+				<input v-model="productBrand" :class="{ 'is-invalid': !isProductBrandValid }" class="border-2 rounded-2 form-control" type="text" id="product-brand" placeholder="...">
 				<div class="invalid-feedback">La marque est obligatoire.</div>
 			</div>
 
 			<div class="text-start my-2">
-				<label :class="{ 'text-danger-emphasis': !isRealTimePriceValid() }" class="form-label mt-2 smooth-trans-300" for="product-price">Prix</label>
-				<input v-model="productPrice" :class="{ 'is-invalid': !isRealTimePriceValid() }" class="border-2 rounded-2 form-control" type="text" id="product-price" placeholder="0.00$">
+				<label :class="{ 'text-danger-emphasis': !isProductPriceValid }" class="form-label mt-2 smooth-trans-300" for="product-price">Prix</label>
+				<input v-model="productPrice" :class="{ 'is-invalid': !isProductPriceValid }" class="border-2 rounded-2 form-control" type="text" id="product-price" placeholder="0.00$">
 				<div class="invalid-feedback">Le prix doit être sous le format: 0.00.</div>
 			</div>
 
 			<div class="text-start my-2">
-				<label :class="{ 'text-danger-emphasis': !isRealTimeStockValid() }" class="form-label mt-2 smooth-trans-300" for="product-stock">Inventaire</label>
-				<input v-model="productStock" :class="{ 'is-invalid': !isRealTimeStockValid() }" class="border-2 rounded-2 form-control" type="number" id="product-stock" placeholder="0">
+				<label :class="{ 'text-danger-emphasis': !isProductStockValid }" class="form-label mt-2 smooth-trans-300" for="product-stock">Inventaire</label>
+				<input v-model="productStock" :class="{ 'is-invalid': !isProductStockValid }" class="border-2 rounded-2 form-control" type="number" id="product-stock" placeholder="0">
 				<div class="invalid-feedback">Le stock doit être un entier positif ou nul.</div>
 			</div>
 
