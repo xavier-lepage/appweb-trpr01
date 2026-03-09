@@ -10,7 +10,7 @@ import ProductList from './ProductList/ProductList.vue';
 import type { Product } from '../models/Product';
 import { productCategories } from '../models/ProductCategory';
 import StockAlert from './StockAlert.vue';
-import { exportProductsCSV } from '../scripts/exportProductsCSV';
+import { exportProductsCSV } from '../services/exportProductsCSV';
 
 // Données de seed
 const productList = ref<Product[]>([
@@ -115,7 +115,8 @@ function manageProductFormVisibility(actionPerformed: ProductAction): void {
 	if (currentAction.value === actionPerformed) {
 		productFormCollapse.hide();
 		currentAction.value = ProductAction.NONE;
-	} else {
+	}
+	else {
 		currentProduct.value = undefined
 		formTitle.value = actionPerformed;
 		productFormCollapse.show();

@@ -42,6 +42,6 @@
 | E1 |   MUST   | ✅ |  Créer un générateur de CSV pour les produits  | #10 |  Le générateur produit une chaîne de caractères qui représente les produits.  |  Le générateur est une fonction qui retourne une chaîne de caractères formattée comme du CSV.  |
 | E2 |   MUST   | ✅ |  Télécharger un fichier à partir du générateur  | #10 |  Un bouton permet de télécharger un fichier construit à partir du générateur.  |  Il a fallu beaucoup de documentation pour trouver comment s'y prendre pour télécharger correctement le fichier.  |
 | F1 |   SHOULD   | ✅ |  Corriger l'attribution d'ID aux produits  | #1 |  Faire l'attribution automatique d'ID lors de l'ajout ou de duplication de produit.  |  L'attribution d'ID de produit se fait maintenant à partir de l'ID le plus élevé.  |
-| F2 |   SHOULD   | ⬜ |  Problèmes au niveau de la validation du formulaire de produit  | #1 |   Validation en temps réel réinitialisée après ajout et le prix affiche correctement les erreurs.   |                   |
+| F2 |   SHOULD   | 🟥 |  Problèmes au niveau de la validation du formulaire de produit  | #1 |   Validation en temps réel réinitialisée après ajout et le prix affiche correctement les erreurs.   |                   |
 | F3 |   COULD   | ⬜ |  Bonifier les validations du formulaire   | #1 |   Rendre encore plus "responsive" les validations du formulaire   |                   |
 |     |          |        |               |               |                                             |                   |

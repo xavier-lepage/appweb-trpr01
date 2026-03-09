@@ -12,9 +12,15 @@
 
 Décrire en 5–10 lignes l’application réalisée :  
 
-- Contexte : 
+- Contexte : Créer un gestionnaire de produits.
 - Objectif principal : Faciliter la gestion d'inventaire pour des commerces de composants d'informatique grand public et les individus prenant part en construction d'ordinateurs, notamment sur demande.
 - Public cible / usage typique : L'application est recommandée pour tout individu prenant part en gestion de son inventaire de composants informatiques.
+- L'application permet de maintenir une liste de produits et permet de l'exporter sous format CSV si désiré. 
+	- Il n'est pas encore possible d'importer un fichier CSV pour charger une liste de produit. 
+	- L'application ne permet pas non plus la sauvegarde automatique dans le stockage du navigateur, ni dans une base de données.
+	- Les autres fonctionnalités incluent la liste, la recherche, l'édition, la duplication et la suppression.
+	- Les produits ont un indicateur du niveau d'inventaire avec code de couleur et il est possible d'afficher les détails d'un produit en cliquant sur celui-ci.
+	- Des alertes sont également affichées pour les produits dont le niveau d'inventaire est critique.
 
 **Produit choisi :** Composants informatiques
 
@@ -46,8 +52,6 @@ Décrire en 5–10 lignes l’application réalisée :
 - [x] 11. L'application possède une identité visuelle cohérente.
 	- L'application porte un logo et un nom.
 
-> Ajouter ici toute fonctionnalité optionnelle (ex. catégorie, actif, date de création, etc.).
-
 ---
 
 ## 3) Technologies utilisées
@@ -55,6 +59,7 @@ Décrire en 5–10 lignes l’application réalisée :
 - Vue.js 3
 - Node.js
 - TypeScript
+- Bootstrap
 
 ---
 
@@ -90,7 +95,6 @@ npm run build
 
 - **Nom du repo / dossier GitHub Pages:** `appweb-trpr01`
 - **URL:** `https://xavier-lepage.github.io/appweb-trpr01/`
-    
 
 ### Notes de configuration
 
@@ -101,22 +105,21 @@ npm run build
 
 ## 6) Architecture et organisation du code
 
-**TODO: Décrire la structure du projet et les responsabilités.**
-
 ### Structure des dossiers
 
 - `src/components/` : Composants UI (responsabilité unique)
 - `src/models/` : Types/interfaces TypeScript (ex. `Product`)
 - `src/services/` : Logique utilitaire (ex. export CSV)
-- `src/assets/` : Images (incluant le logo)
+- `src/assets/icons/` : Icônes utilisées par l'application
+- `src/assets/images/` : Images utilisées par l'application (incluant le logo)
 - `src/styles/` : Fichiers CSS
 - `src/scripts` : Fichiers TypeScript
-
 
 ### Composants clés
 
 - `App` : Composant principal pour monter l'application.
 - `MainMenu` : Menu principal avec boutons pour accéder aux fonctionnalités.
+- `Header` : En-tête de l'application qui comprend son logo et son nom.
 - `ProductForm` : Formulaire d'ajout, d'édition et de duplication de produit.
 - `ProductDisplay` : Affiche les informations liées à un produit à l'écran et offre des options pour dupliquer, éditer ou supprimer le produit lié.
 - `ProductList` : Liste des produits, contient des `ProductDisplay` et une `SearchBar` pour filtrer les produits.
@@ -131,32 +134,8 @@ npm run build
 
 ### Outil(s) utilisé(s)
 
-- Nom des outils (ex. ChatGPT, Copilot, etc.)_
+- Aucun.
 
 ### Comment l’IA a été utilisée
 
-Décrire concrètement :
-
-- Brainstorming / planification
-- Aide au debug
-- Clarification TypeScript/Vue
-- Suggestions UI/CSS
-- Génération d’exemples (puis adaptation) 
-
-### À quel endroit
-
-#### Nom du fichier 1
-
-- Ligne ## à ##: Décrire pourquoi
-- Ligne ## à ##: Décrire pourquoi
-    
-#### Nom du fichier 2
-
-- Ligne ## à ##: Décrire pourquoi
-- Ligne ## à ##: Décrire pourquoi
-
-### Exemples de prompts (2 à 5)
-
-1. “…”
-2. “…”
-
+L'IA n'a pas été utilisée.
