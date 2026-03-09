@@ -138,11 +138,19 @@ Implémenter un style minimaliste pour ProductDisplay et un indicateur visuel de
 ---
 
 ## Résumé global (à compléter avant remise)
-- **Ce dont je suis le plus fier/fière :** …
-- **Ce que j’améliorerais avec plus de temps :** …
+- **Ce dont je suis le plus fier/fière :** Je suis particulièrement fier de ma liste de produits au niveau de sa structure, son aspect visuel et la convivialité de la fonction de recherche. Il en va de même pour l'alerte modale lors d'une suppression de produit. Je suis aussi fier de mon effort concernant la planification.
+- **Ce que j’améliorerais avec plus de temps :** 
+	- La validation du formulaire ne fonctionne pas exactement comme je l'aurais espéré. J'aurais aimé la rendre un peu plus dynamique et régler ses quelques bogues. 
+	- De manière similaire, j'aurais pu peaufiner le système d'ouverture et de fermeture des différents panneaux ou implémenter du défilement automatique pour les mettre en évidence.
+	- J'aurais aimé mettre en place une notification lors du téléchargement de `CSV` pour donner plus de rétroaction à l'utilisateur.
+	- J'aurais pris le temps d'isoler davantage ma logique applicatif dans plusieurs fichiers de scripts.
+	- Pour réutiliser davantage mon code, j'aurais fait un composant spécifique pour l'alerte modale.
+	- J'aurais ajouté un `prop` optionnel à mon composant de bouton afin d'inclure une icône.
+	- Je crois qu'il aurait été pertinent de d'implémenter l'importation de fichier `CSV` afin d'avoir un système de sauvegarde un peu plus fonctionnel ainsi que pour permettre le partage. Une autre alternative serait le `JSON`.
+	- Finalement, j'aurais ajouté plus de catégories de composants pour plus de diversité.
 - **3 apprentissages techniques :**  
-  1) …  
-  2) …  
-  3) …
+  1)	J'ai pratiqué mon sens de la planification et de la structure de projet en devant être prévoyant pour faciliter le développement.
+  2) 	J'ai nettement améliorer ma maîtrise de Bootstrap en l'utilisant pour la grande majorité de la mise en page (à quelques exceptions près qui demandaient un contrôle plus fin).
+  3)	J'ai appris à télécharger un fichier à partir du script.
 
 ---
