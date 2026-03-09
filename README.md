@@ -49,8 +49,6 @@ Décrire en 5–10 lignes l’application réalisée :
 	- Notification (message / toast / snackbar) lorsqu'un produit atteint un stock critique (inférieur ou égal à 3).
 - [x] 10. Je peux exporter la liste des produits en CSV.
 	- Bouton "Exporter" permettant de télécharger la liste en format CSV.
-- [x] 11. L'application possède une identité visuelle cohérente.
-	- L'application porte un logo et un nom.
 
 ---
 
